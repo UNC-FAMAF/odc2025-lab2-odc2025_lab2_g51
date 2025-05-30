@@ -1,6 +1,7 @@
 	.equ SCREEN_WIDTH, 		640
 	.equ SCREEN_HEIGH, 		480			//definicion de contantes simbolicas tamano del framebuffer
 	.equ BITS_PER_PIXEL,  	32			//tamanos de direccion de memoria de cada pixel
+    .equ NUM_LETRAS, 8
 
 	.globl main
 
@@ -8,29 +9,23 @@ main:
 	// x0 contiene la direccion base del framebuffer
  	mov x20, x0	// Guarda la dirección base del framebuffer en x20
 	//---------------- CODE HERE ------------------------------------
-    
-	mov w10, 0x00000000   //setea el color negro
+    // --- Inicialización del framebuffer ---
+    mov x0, x20              // guardamos framebuffer en x20
 
-	mov x2, SCREEN_HEIGH         // Y Size
-loop1:
-	mov x1, SCREEN_WIDTH         // X Size
-loop0:
-	stur w10,[x0]  
-	add x0,x0,4	   
-	sub x1,x1,1	   
-	cbnz x1,loop0  
-	sub x2,x2,1	   
-	cbnz x2,loop1  
-	//hasta aca la pantalla esta en negro
-    ldr x3, =letra_Y
-    mov x0, x20        // framebuffer
-    mov x1, 100        // x
-    mov x2, 100        // y
-    mov w4, 0x00FF00   // verdes
-    bl dibujar_letra
+    // --- Configurar color ---
+    mov w4, 0x0FFFF0
+    mov x2, 0                // Y inicial
+    mov x1, 0              // x1 = X columna
+    ldr x3, =tabla_letras    // x3 = puntero a tabla
 
+    bl lluvia_columna_secuencial
+    mov x1, 100              // x1 = X columna
+    mov x2, 0                // Y inicial
+    ldr x3, =tabla_letras    // x3 = puntero a tabla
+    bl lluvia_columna_secuencial
 InfLoop:
-	b InfLoop
+    b InfLoop
+    
 
 // FUNCION DIBUJAR LETRA: PARAMETROS QUE TOMA
 // x0 = framebuffer base
@@ -40,8 +35,8 @@ InfLoop:
 // w4 = color ARGB
 
 // parametros configurables:
-.equ BLOQUE_TAM,     2       // tamano de cada pixel que confoma la letra
-.equ LETRA_ANCHO,    5       // tamano del array del bitmap 5x7 en este caso
+.equ BLOQUE_TAM,     1       // tamano de cada pixel que confoma la letra
+.equ LETRA_ANCHO,    5       // tamano del array del bitmap 5x7 en este caso, si se cambia, tambien debe cambiar el tamano del bitmap
 .equ LETRA_ALTO,     7       
 
 dibujar_letra:
@@ -56,7 +51,6 @@ dibujar_letra:
     lsl w13, w13, w11
     and w14, w12, w13
     cbz w14, .skip_pixel
-
     
     mov x14, 0
 .bloque_fila:
@@ -65,12 +59,12 @@ dibujar_letra:
 
 
     uxtw x16, w11 
-    lsl x16, x16, #1              // CAMBIAR #N PARA CONFIGURAR TAMANO
+    lsl x16, x16, #0              // CAMBIAR #N PARA CONFIGURAR TAMANO
     add x16, x1, x16
     add x16, x16, x15
 
     mov x17, x10
-    lsl x17, x17, #1              // CAMBIAR #N PARA CONFIGURAR TAMANO
+    lsl x17, x17, #0              // CAMBIAR #N PARA CONFIGURAR TAMANO
     add x17, x2, x17
     add x17, x17, x14
 
@@ -78,12 +72,12 @@ dibujar_letra:
     mov x18, 640
     mul x18, x17, x18
     add x18, x18, x16
-    lsl x18, x18, 2
+    lsl x18, x18, #2
     add x18, x0, x18
 
     // Pinta pixel
     str w4, [x18]
-
+    
     add x15, x15, 1
     cmp x15, BLOQUE_TAM
     blt .bloque_columna
@@ -101,16 +95,41 @@ dibujar_letra:
     cmp x10, LETRA_ALTO
     blt .fila_ciclo
 
-    br x30
+    ret
 
-letra_Y:
-    .byte 0b10001
-    .byte 0b01010
-    .byte 0b00100
-    .byte 0b00100
-    .byte 0b00100
-    .byte 0b00100
-    .byte 0b00100
+lluvia_columna_secuencial:
+
+    mov x21, x1       // guardar posición X de la columna
+    mov x22, x2      // y actual
+    mov x23, x3      // puntero a tabla de letras
+    mov w24, w4      // color
+
+    mov x27, 0       // índice de letra
+
+.loop_columna:
+    // cargar letra desde la tabla: letra = tabla[x10]
+    ldr x26, [x23, x27, lsl #3]
+    // preparar y llamar a dibujar_letra
+    mov x1, x21       
+    mov x2, x22       
+    mov x3, x26
+    mov w4, w24
+    bl dibujar_letra
+
+    // avanzar en tabla
+    add x27, x27, 1
+    cmp x27, 8
+    blt .skip_reset
+    mov x27, 0        // reinicia si llegó al final
+
+.skip_reset:
+    // avanzar verticalmente
+    add x22, x22, 8 
+    cmp x22, #488
+    blt .loop_columna
+
+    ret
+
 
 
     
