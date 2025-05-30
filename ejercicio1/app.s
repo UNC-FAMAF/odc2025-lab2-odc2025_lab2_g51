@@ -98,6 +98,13 @@ dibujar_letra:
     ret
 
 lluvia_columna_secuencial:
+    stp x29, x30, [sp, -16]!     
+    mov x29, sp
+    stp x21, x22, [sp, -16]!
+    stp x23, x24, [sp, -16]!
+    stp x25, x26, [sp, -16]!
+    str x27, [sp, -16]!
+
 
     mov x21, x1       // guardar posición X de la columna
     mov x22, x2      // y actual
@@ -128,8 +135,11 @@ lluvia_columna_secuencial:
     cmp x22, #488
     blt .loop_columna
 
+    ldr x27,  [sp], 16
+    ldp x25, x26, [sp], 16
+    ldp x23, x24, [sp], 16
+    ldp x21, x22, [sp], 16
+    ldp x29, x30, [sp], 16    
     ret
-
-
 
     
