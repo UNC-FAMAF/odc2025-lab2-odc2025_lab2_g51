@@ -206,6 +206,91 @@ loop:
     movz w4, 0x00, lsl 16
 	movk w4, 0x0000, lsl 0
     bl llenar_cuadrado
+
+    //mesa
+    movz w4, 0x6633
+    movk w4, 0x0099, lsl #16
+    mov x1, 80              // x inicial
+    mov x2, 420             // y inicial
+    mov x5, 560             // ancho
+    mov x6, 30              // alto
+    bl llenar_cuadrado
+
+    mov x1, 180            // posición x
+    mov x2, 320            // posición y
+    mov x5, 460            // ancho del rectángulo
+    mov x6, 100            // alto del rectángulo
+    bl llenar_cuadrado
+
+    mov x1, 80        // posición X de inicio
+    mov x2, 420        // posición Y de inicio
+    mov x5, 100         // base
+    mov x6, 100         // altura
+    bl triangulo_rectangulo_reflejado
+
+    mov x1, 70         // posición X (ajustá según necesidad)
+    mov x2, 420        // posición Y (ajustá según necesidad)
+    mov w4, 0x000000   // color negro
+    mov x5, 600        // largo de la línea en píxeles
+    bl linea_horizontal
+
+    // Pantalla (cuadrado grande)
+    mov x1, 160        // x inicial
+    mov x2, 240        // y inicial (más arriba de la mesa)
+    mov x5, 200        // ancho
+    mov x6, 120         // alto
+    movz w4, 0x2422
+    movk w4, 0x0021, lsl #16
+    bl llenar_cuadrado
+
+    //// Soporte vertical 
+    mov x1, 250        // x inicial
+    mov x2, 320        // y inicial 
+    mov x5, 20        // ancho
+    mov x6, 80         // alto
+    movz w4, 0x302D
+    movk w4, 0x002C, lsl #16
+    bl llenar_cuadrado
+
+    //// soporte hhorizontal
+    mov x1, 170        // x inicial
+    mov x2, 390        // y inicial 
+    mov x5, 180        // ancho
+    mov x6, 20         // alto
+    movz w4, 0x302D
+    movk w4, 0x002C, lsl #16
+    bl llenar_cuadrado
+    
+    mov w4, #0x0000
+    mov x1, 260         // centro x del círculo
+    mov x2, 310         // centro y del círculo
+    mov x5, 25          // radio
+    bl circulo
+
+    mov x1, 200          // x inicial
+    mov x2, 250          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 60           // alto de línea
+    bl linea_diagonal
+
+    mov x1, 270          // x inicial
+    mov x2, 300          // y inicial
+    mov x5, 1            // ancho
+    mov x6, 50           // alto
+    bl linea_diagonal2
+
+    mov x1, 248         // X inicial
+    mov x2, 300         // Y inicial
+    mov x5, 60         // alto
+    mov x6, 1           // grosor
+    bl linea_vertical
+
+    mov x1, 271         // X inicial
+    mov x2, 300         // Y inicial
+    mov x5, 60         // alto
+    mov x6, 1           // grosor
+    bl linea_vertical
+
 InfLoop:
     b InfLoop
 

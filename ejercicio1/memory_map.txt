@@ -1,0 +1,103 @@
+
+There are no discarded input sections
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD app.o
+LOAD funciones.o
+LOAD simbolos.o
+LOAD start.o
+                0x0000000000080000                . = 0x80000
+
+.text           0x0000000000080000    0x90d74
+ *(.text.boot)
+ .text.boot     0x0000000000080000    0x100c8 start.o
+                0x0000000000080000                _start
+ *(.text*)
+ .text          0x00000000000900c8      0x880 app.o
+                0x00000000000904f4                main
+ .text          0x0000000000090948      0x42c funciones.o
+ .text          0x0000000000090d74        0x0 simbolos.o
+ .text          0x0000000000090d74    0x80000 start.o
+
+.iplt           0x0000000000110d74        0x0
+ .iplt          0x0000000000110d74        0x0 app.o
+
+.rela.dyn       0x0000000000110d78        0x0
+ .rela.iplt     0x0000000000110d78        0x0 app.o
+ .rela.text.boot
+                0x0000000000110d78        0x0 app.o
+
+.data           0x0000000000110d74      0x278
+ .data          0x0000000000110d74        0x0 app.o
+ .data          0x0000000000110d74        0x0 funciones.o
+ .data          0x0000000000110d74      0x278 simbolos.o
+                0x0000000000110d74                letra_0
+                0x0000000000110d7b                letra_1
+                0x0000000000110d82                letra_Y
+                0x0000000000110d89                letra_O
+                0x0000000000110d90                letra_D
+                0x0000000000110d97                letra_C
+                0x0000000000110d9e                numero_2
+                0x0000000000110da5                numero_5
+                0x0000000000110dac                tabla_letras1
+                0x0000000000110dec                tabla_letras2
+                0x0000000000110e2c                tabla_letras3
+                0x0000000000110fac                tabla_general
+ .data          0x0000000000110fec        0x0 start.o
+
+.igot.plt       0x0000000000110ff0        0x0
+ .igot.plt      0x0000000000110ff0        0x0 app.o
+
+.bss            0x0000000000110fec        0x0
+ *(.bss*)
+ .bss           0x0000000000110fec        0x0 app.o
+ .bss           0x0000000000110fec        0x0 funciones.o
+ .bss           0x0000000000110fec        0x0 simbolos.o
+ .bss           0x0000000000110fec        0x0 start.o
+
+.bss            0x0000000000110fec        0x4
+                0x0000000000110ff0                . = ALIGN (0x10)
+ *fill*         0x0000000000110fec        0x4 
+                0x0000000000110ff0                __bss_start = .
+ *(.bss .bss.*)
+ *(COMMON)
+                0x0000000000110ff0                __bss_end = .
+                0x0000000000110ff0                _end = .
+                0x0000000000000000                __bss_size = ((__bss_end - __bss_start) >> 0x3)
+OUTPUT(kernel8.elf elf64-littleaarch64)
+LOAD linker stubs
+
+.debug_line     0x0000000000000000      0x3fd
+ .debug_line    0x0000000000000000      0x269 app.o
+ .debug_line    0x0000000000000269      0x144 funciones.o
+ .debug_line    0x00000000000003ad       0x50 start.o
+
+.debug_info     0x0000000000000000       0x8a
+ .debug_info    0x0000000000000000       0x2e app.o
+ .debug_info    0x000000000000002e       0x2e funciones.o
+ .debug_info    0x000000000000005c       0x2e start.o
+
+.debug_abbrev   0x0000000000000000       0x3c
+ .debug_abbrev  0x0000000000000000       0x14 app.o
+ .debug_abbrev  0x0000000000000014       0x14 funciones.o
+ .debug_abbrev  0x0000000000000028       0x14 start.o
+
+.debug_aranges  0x0000000000000000       0x90
+ .debug_aranges
+                0x0000000000000000       0x30 app.o
+ .debug_aranges
+                0x0000000000000030       0x30 funciones.o
+ .debug_aranges
+                0x0000000000000060       0x30 start.o
+
+.debug_str      0x0000000000000000       0x6d
+ .debug_str     0x0000000000000000       0x6d app.o
+                                         0x65 (size before relaxing)
+ .debug_str     0x000000000000006d       0x65 funciones.o
+ .debug_str     0x000000000000006d       0x61 start.o
