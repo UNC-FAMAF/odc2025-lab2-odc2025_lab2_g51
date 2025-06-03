@@ -4,6 +4,7 @@
     .equ NUM_LETRAS, 8
 
 	.globl main
+    .include "funciones.s"
 
 main:
 	// x0 contiene la direccion base del framebuffer
