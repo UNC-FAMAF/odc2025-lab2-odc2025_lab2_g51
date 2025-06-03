@@ -225,4 +225,71 @@ loopI:
 ret
 
 
+dentro_circulo:
+
+        // teniendo en cuenta la formula de la circunferencia   (x - h)^2 + (y - k)^2 = r^2
+        // si un valor es <= a r^2, estará dentro del circulo, sino afuera de este
+
+    stp x29, x30, [sp, -16]!
+    mov x29, sp
+    stp x27, x28, [sp, -16]!
+    stp x25, x26, [sp, -16]!
+    stp x23, x24, [sp, -16]!
+    stp x21, x22, [sp, -16]!
+    stp x19, x20, [sp, -16]!
+
+    mov x27, x3   // eje X de centro
+    mov x28, x5   // eje y de centro
+    mov x25, x6    // radio
+
+    mul x26, x25, x25  // r^2
+    sub x24, x10, x27  // (x - h)
+    mul x24, x24, x24  // (x - h)^2
+    sub x23, x11, x28  // (y - k)
+    mul x23, x23, x23  // (y - k)^2
+    add x22, x24, x23  // (x - h)^2 + (y - k)^2
+
+    cmp x22, x26       // si x22 es menor que el radio^2, pinta un pixel
+    b.ge fuera
+
+    mov x1, x10       // x
+    mov x2, x11       // y
+    
+    bl pixel
+
+fuera:
+    ldp x19, x20, [sp], 16
+    ldp x21, x22, [sp], 16 
+    ldp x23, x24, [sp], 16     // libera memoria
+    ldp x25, x26, [sp], 16
+    ldp x27, x28, [sp], 16
+    ldp x29, x30, [sp], 16
+
+ret
+
+circulo:
+
+    // ahora busco ver donde empieza y donde termina el circulo en los ejes
+    // para eso haga (centro x - radio) y (centro x + radio) y los mismo en el eje y
+
+    stp x29, x30, [sp, -16]!
+    mov x29, sp
+    stp x27, x28, [sp, -16]!
+    stp x25, x26, [sp, -16]!
+    stp x23, x24, [sp, -16]!
+    stp x21, x22, [sp, -16]!
+
+
+    mov x27, x1   // eje X de centro
+    mov x28, x2   // eje y de centro
+    mov x25, x5    // radio
+    
+
+
+    sub x24, x27, x25 // (centro x - radio)
+    add x23, x27, x25 // (centro x + radio)
+
+    sub x22, x28, x25 // (centro y - radio)
+    add x21, x28, x25 // (centro y + radio)
+
 
