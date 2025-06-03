@@ -3,30 +3,37 @@
 	.equ BITS_PER_PIXEL,  	32			//tamanos de direccion de memoria de cada pixel
     .equ NUM_LETRAS, 8
 
+    #include "simbolos.s"
 	.globl main
-    .include "funciones.s"
 
 main:
-	// x0 contiene la direccion base del framebuffer
- 	mov x20, x0	// Guarda la dirección base del framebuffer en x20
-	//---------------- CODE HERE ------------------------------------
-    // --- Inicialización del framebuffer ---
-    mov x0, x20              // guardamos framebuffer en x20
 
-    // --- Configurar color ---
-    mov w4, 0x0FFFF0
-    mov x2, 0                // Y inicial
-    mov x1, 0              // x1 = X columna
-    ldr x3, =tabla_letras    // x3 = puntero a tabla
+mov x20, x0
+mov w4, 0x00FF00
+mov x1, 0
+mov x5, 0
+
+ldr x6, =tabla_general
+
+loop:
+    mov x2, 0
+
+    // cargar puntero a tabla desde tabla_general[x5]
+    ldr x3, [x6, x5, lsl #3]
 
     bl lluvia_columna_secuencial
-    mov x1, 100              // x1 = X columna
-    mov x2, 0                // Y inicial
-    ldr x3, =tabla_letras    // x3 = puntero a tabla
-    bl lluvia_columna_secuencial
+
+    add x1, x1, #16
+    add x5, x5, #1
+    cmp x5, #8
+    blt .no_reset
+    mov x5, 0
+.no_reset:
+    cmp x1, #640
+    blt loop
+
 InfLoop:
     b InfLoop
-    
 
 // FUNCION DIBUJAR LETRA: PARAMETROS QUE TOMA
 // x0 = framebuffer base
@@ -141,6 +148,5 @@ lluvia_columna_secuencial:
     ldp x23, x24, [sp], 16
     ldp x21, x22, [sp], 16
     ldp x29, x30, [sp], 16    
-    ret
-
     
+    ret
