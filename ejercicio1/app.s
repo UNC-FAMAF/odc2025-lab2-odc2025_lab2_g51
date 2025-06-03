@@ -4,6 +4,7 @@
     .equ NUM_LETRAS, 8
 
     #include "simbolos.s"
+    .include "funciones.s"
 	.globl main
 
 main:
@@ -32,6 +33,179 @@ loop:
     cmp x1, #640
     blt loop
 
+/// gaturro
+
+
+//cabeza
+
+//cachetes
+ 
+       // linea (boca)
+    mov x1, 443
+    mov x2, 225
+    mov x5, 32
+    movz w4, 0x00, lsl 16
+	movk w4, 0x0000, lsl 0
+    bl circulo
+
+        // color (boca)
+    mov x1, 443
+    mov x2, 225
+    mov x5, 30
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xEA55, lsl 0
+    bl circulo
+
+        // linea (cachete izq)
+    mov x1, 400
+    mov x2, 210
+    mov x5, 57
+    movz w4, 0x00, lsl 16
+	movk w4, 0x00, lsl 0
+    bl circulo
+    
+        // color (cachete izq)
+    mov x1, 400
+    mov x2, 210
+    mov x5, 55
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xE255, lsl 0
+    bl circulo
+
+        // linea (cachete der)
+    mov x1, 485
+    mov x2, 210
+    mov x5, 57
+    movz w4, 0x00, lsl 16
+	movk w4, 0x00, lsl 0
+    bl circulo
+
+        // color (cachete izq)
+    mov x1, 400
+    mov x2, 210
+    mov x5, 55
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xE255, lsl 0
+    bl circulo
+
+        // color (cachete der)
+    mov x1, 485
+    mov x2, 210
+    mov x5, 55
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xE255, lsl 0
+    bl circulo
+
+
+
+////OJO 
+
+    mov x1, 425
+    mov x2, 135
+    mov x5, 30
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xFFFF, lsl 0
+    bl circulo
+
+    mov x1, 425
+    mov x2, 150
+    mov x5, 30
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xFFFF, lsl 0
+    bl circulo
+
+
+
+    mov x1, 465
+    mov x2, 135
+    mov x5, 30
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xFFFF, lsl 0
+    bl circulo
+
+    mov x1, 465
+    mov x2, 150
+    mov x5, 30
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xFFFF, lsl 0
+    bl circulo
+
+
+
+
+/// nariz
+
+    mov x1, 443
+    mov x2, 190
+    mov x5, 10
+    movz w4, 0xF6, lsl 16
+	movk w4, 0x89E3, lsl 0
+    bl circulo
+
+    mov x1, 456
+    mov x2, 180
+    mov x5, 10
+    movz w4, 0xF6, lsl 16
+	movk w4, 0x89E3, lsl 0
+    bl circulo
+
+    mov x1, 430
+    mov x2, 180
+    mov x5, 10
+    movz w4, 0xF6, lsl 16
+	movk w4, 0x89E3, lsl 0
+    bl circulo
+
+    mov x1, 443
+    mov x2, 177
+    mov x5, 10
+    movz w4, 0xF6, lsl 16
+	movk w4, 0x89E3, lsl 0
+    bl circulo
+
+    mov x0, x20
+    mov x1, 443      // x
+    mov x2, 200        // y
+    mov x5, 55       // largo
+    movz w4, 0x00, lsl 16
+	movk w4, 0x0000, lsl 0
+    bl linea_vertical
+
+    mov x0, x20
+    mov x1, 444      // x
+    mov x2, 115        // y
+    mov x5, 55       // largo
+    movz w4, 0x00, lsl 16
+	movk w4, 0x0000, lsl 0
+    bl linea_vertical
+//// lentes
+
+    mov x1, 440      // x
+    mov x2, 150       // y
+    mov x5, 30       // largo
+    mov x6, 10     // alto
+    movz w4, 0x00, lsl 16
+	movk w4, 0x0000, lsl 0
+    bl llenar_cuadrado
+
+
+    mov x1, 385      // x
+    mov x2, 140       // y
+    mov x5, 55     // largo
+    mov x6, 35     // alto
+    movz w4, 0x00, lsl 16
+	movk w4, 0x0000, lsl 0
+    bl llenar_cuadrado
+
+
+
+    mov x1, 455      // x
+    mov x2, 140       // y
+    mov x5, 55      // largo
+    mov x6, 35     // alto
+    movz w4, 0x00, lsl 16
+	movk w4, 0x0000, lsl 0
+    bl llenar_cuadrado
 InfLoop:
     b InfLoop
 

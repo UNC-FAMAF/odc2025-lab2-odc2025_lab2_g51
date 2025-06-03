@@ -381,3 +381,38 @@ circulo:
     add x21, x28, x25 // (centro y + radio)
 
 
+    
+
+loopY:
+    cmp x22, x21
+    b.gt fin_y
+
+    mov x26, x24
+
+loopX:
+    cmp x26, x23
+    b.gt sig_y
+
+    mov x10, x26        // x
+    mov x11, x22        // y
+
+    mov x3, x27         // centro x
+    mov x5, x28         // centro y
+    mov x6, x25         // radio
+
+    bl dentro_circulo
+
+    add x26, x26, 1
+    b loopX
+
+sig_y: 
+    add x22, x22, 1
+    b loopY
+
+fin_y:
+    ldp x21, x22, [sp], 16
+    ldp x23, x24, [sp], 16     // libera memoria
+    ldp x25, x26, [sp], 16
+    ldp x27, x28, [sp], 16
+    ldp x29, x30, [sp], 16
+ret
