@@ -33,6 +33,51 @@ loop:
     cmp x1, #640
     blt loop
 
+
+/// silla
+
+ // respaldo
+
+    mov x1, 400            // x
+    mov x2, 100            // y
+    mov x5, 150            // largo
+    mov x6, 250            // alto
+    movz w4, 0x52, lsl 16
+    movk w4, 0x4D47, lsl 0
+    bl llenar_cuadrado
+
+    mov x1, 475    // centro x del círculo
+    mov x2, 150    // centro y del círculo
+    mov x5, 75    // radio
+    bl circulo
+
+    mov x1, 420            // x
+    mov x2, 300            // y
+    mov x5, 110            // largo
+    movz w4, 0x75, lsl 16
+    movk w4, 0x6E66, lsl 0
+    bl linea_horizontal
+
+    mov x1, 420            // x
+    mov x2, 270            // y
+    mov x5, 110            // largo
+    bl linea_horizontal
+
+    mov x1, 420            // x
+    mov x2, 150            // y
+    mov x5, 110            // largo
+    bl linea_horizontal
+
+    mov x1, 420            // x
+    mov x2, 120            // y
+    mov x5, 110            // largo
+    bl linea_horizontal
+
+    mov x1, 450            // x
+    mov x2, 90             // y
+    mov x5, 50            // largo
+    bl linea_horizontal
+
 /// gaturro
 
 
@@ -290,6 +335,30 @@ loop:
     mov x5, 60         // alto
     mov x6, 1           // grosor
     bl linea_vertical
+
+
+    /// lampara
+
+    mov x1, 91   // centro x del círculo
+    mov x2, 50    // centro y del círculo
+    mov x5, 20    // radio
+    movz w4, 0xFF, lsl 16
+    movk w4, 0xFFCC, lsl 0
+    bl circulo
+
+    mov x1, 80       // x inicial
+    mov x2, 0        // y inicial 
+    mov x5, 21        // ancho
+    mov x6, 30         // alto
+    movz w4, 0x9185
+    movk w4, 0x007F, lsl #16
+    bl llenar_cuadrado
+
+    mov x1, 46	  // x inicial
+    mov x2, 50   // y inicial
+    mov x5, 90   // base
+    mov x6, 40     // altura
+    bl triangulo_equilatero
 
 InfLoop:
     b InfLoop
