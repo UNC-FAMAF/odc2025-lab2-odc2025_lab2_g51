@@ -33,52 +33,83 @@ loop:
     cmp x1, #640
     blt loop
 
-
 /// silla
 
  // respaldo
 
-    mov x1, 400            // x
-    mov x2, 100            // y
+    mov x1, 440            // x
+    mov x2, 140            // y
     mov x5, 150            // largo
     mov x6, 250            // alto
     movz w4, 0x52, lsl 16
     movk w4, 0x4D47, lsl 0
     bl llenar_cuadrado
 
-    mov x1, 475    // centro x del círculo
-    mov x2, 150    // centro y del círculo
+    mov x1, 515    // centro x del círculo
+    mov x2, 190    // centro y del círculo
     mov x5, 75    // radio
     bl circulo
 
-    mov x1, 420            // x
-    mov x2, 300            // y
-    mov x5, 110            // largo
+    mov x1, 460            // x
+    mov x2, 320            // y
+    mov x5, 130            // largo
     movz w4, 0x75, lsl 16
     movk w4, 0x6E66, lsl 0
     bl linea_horizontal
 
-    mov x1, 420            // x
-    mov x2, 270            // y
+    mov x1, 460            // x
+    mov x2, 310            // y
     mov x5, 110            // largo
     bl linea_horizontal
 
-    mov x1, 420            // x
-    mov x2, 150            // y
+    mov x1, 460            // x
+    mov x2, 190            // y
     mov x5, 110            // largo
     bl linea_horizontal
 
-    mov x1, 420            // x
-    mov x2, 120            // y
+    mov x1, 460            // x
+    mov x2, 160            // y
     mov x5, 110            // largo
     bl linea_horizontal
 
-    mov x1, 450            // x
-    mov x2, 90             // y
+    mov x1, 490            // x
+    mov x2, 130             // y
     mov x5, 50            // largo
     bl linea_horizontal
 
+
 /// gaturro
+
+///cuerpo
+
+//torso
+    mov x1, 470      // x
+    mov x2, 300       // y
+    mov x5, 80       // largo
+    mov x6, 70     // alto
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl llenar_cuadrado
+
+
+    mov x1, 510
+    mov x2, 340
+    mov x5, 25
+    movz w4, 0xFF, lsl 16
+	movk w4, 0xE255, lsl 0
+    bl circulo
+
+
+/// brazo izq
+
+    mov x1, 340     // x
+    mov x2, 305       // y
+    mov x5, 140      // largo
+    mov x6, 16     // alto
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl llenar_cuadrado
+
 
 
 //cabeza
@@ -86,56 +117,56 @@ loop:
 //cachetes
  
        // linea (boca)
-    mov x1, 443
-    mov x2, 225
+    mov x1, 513
+    mov x2, 275
     mov x5, 32
     movz w4, 0x00, lsl 16
 	movk w4, 0x0000, lsl 0
     bl circulo
 
         // color (boca)
-    mov x1, 443
-    mov x2, 225
+    mov x1, 513
+    mov x2, 275
     mov x5, 30
     movz w4, 0xFF, lsl 16
 	movk w4, 0xEA55, lsl 0
     bl circulo
 
         // linea (cachete izq)
-    mov x1, 400
-    mov x2, 210
+    mov x1, 470
+    mov x2, 260
     mov x5, 57
     movz w4, 0x00, lsl 16
 	movk w4, 0x00, lsl 0
     bl circulo
     
         // color (cachete izq)
-    mov x1, 400
-    mov x2, 210
+    mov x1, 470
+    mov x2, 260
     mov x5, 55
     movz w4, 0xFF, lsl 16
 	movk w4, 0xE255, lsl 0
     bl circulo
 
         // linea (cachete der)
-    mov x1, 485
-    mov x2, 210
+    mov x1, 555
+    mov x2, 260
     mov x5, 57
     movz w4, 0x00, lsl 16
 	movk w4, 0x00, lsl 0
     bl circulo
 
         // color (cachete izq)
-    mov x1, 400
-    mov x2, 210
+    mov x1, 470
+    mov x2, 260
     mov x5, 55
     movz w4, 0xFF, lsl 16
 	movk w4, 0xE255, lsl 0
     bl circulo
 
         // color (cachete der)
-    mov x1, 485
-    mov x2, 210
+    mov x1, 555
+    mov x2, 260
     mov x5, 55
     movz w4, 0xFF, lsl 16
 	movk w4, 0xE255, lsl 0
@@ -145,15 +176,17 @@ loop:
 
 ////OJO 
 
-    mov x1, 425
-    mov x2, 135
+//blanco
+
+    mov x1, 500
+    mov x2, 185
     mov x5, 30
     movz w4, 0xFF, lsl 16
 	movk w4, 0xFFFF, lsl 0
     bl circulo
 
-    mov x1, 425
-    mov x2, 150
+    mov x1, 500
+    mov x2, 195
     mov x5, 30
     movz w4, 0xFF, lsl 16
 	movk w4, 0xFFFF, lsl 0
@@ -161,72 +194,89 @@ loop:
 
 
 
-    mov x1, 465
-    mov x2, 135
+    mov x1, 530
+    mov x2, 185
     mov x5, 30
     movz w4, 0xFF, lsl 16
 	movk w4, 0xFFFF, lsl 0
     bl circulo
 
-    mov x1, 465
-    mov x2, 150
+    mov x1, 530
+    mov x2, 195
     mov x5, 30
     movz w4, 0xFF, lsl 16
 	movk w4, 0xFFFF, lsl 0
     bl circulo
-
 
 
 
 /// nariz
 
-    mov x1, 443
-    mov x2, 190
+    mov x1, 513
+    mov x2, 240
     mov x5, 10
     movz w4, 0xF6, lsl 16
 	movk w4, 0x89E3, lsl 0
     bl circulo
 
-    mov x1, 456
-    mov x2, 180
+    mov x1, 526
+    mov x2, 230
     mov x5, 10
     movz w4, 0xF6, lsl 16
 	movk w4, 0x89E3, lsl 0
     bl circulo
 
-    mov x1, 430
-    mov x2, 180
+    mov x1, 500
+    mov x2, 230
     mov x5, 10
     movz w4, 0xF6, lsl 16
 	movk w4, 0x89E3, lsl 0
     bl circulo
 
-    mov x1, 443
-    mov x2, 177
+    mov x1, 513
+    mov x2, 227
     mov x5, 10
     movz w4, 0xF6, lsl 16
 	movk w4, 0x89E3, lsl 0
     bl circulo
 
-    mov x0, x20
-    mov x1, 443      // x
-    mov x2, 200        // y
+    mov x1, 513      // x
+    mov x2, 250        // y
+    mov x5, 50       // largo
+    movz w4, 0x00, lsl 16
+	movk w4, 0x0000, lsl 0
+    bl linea_vertical
+
+    mov x1, 514      // x
+    mov x2, 162        // y
     mov x5, 55       // largo
     movz w4, 0x00, lsl 16
 	movk w4, 0x0000, lsl 0
     bl linea_vertical
 
-    mov x0, x20
-    mov x1, 444      // x
-    mov x2, 115        // y
-    mov x5, 55       // largo
-    movz w4, 0x00, lsl 16
-	movk w4, 0x0000, lsl 0
-    bl linea_vertical
+/// orejas
+    mov x1, 465
+    mov x2, 195
+    mov x5, 30   // base
+    mov x5, 10
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl circulo
+
+    mov x1, 560
+    mov x2, 195
+    mov x5, 30   // base
+    mov x5, 10
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl circulo
+
+
+
 //// lentes
 
-    mov x1, 440      // x
-    mov x2, 150       // y
+    mov x1, 490      // x
+    mov x2, 200       // y
     mov x5, 30       // largo
     mov x6, 10     // alto
     movz w4, 0x00, lsl 16
@@ -234,54 +284,54 @@ loop:
     bl llenar_cuadrado
 
 
-    mov x1, 385      // x
-    mov x2, 140       // y
-    mov x5, 55     // largo
+    mov x1, 450      // x
+    mov x2, 190       // y
+    mov x5, 55    // largo
     mov x6, 35     // alto
     movz w4, 0x00, lsl 16
 	movk w4, 0x0000, lsl 0
     bl llenar_cuadrado
 
 
-
-    mov x1, 455      // x
-    mov x2, 140       // y
+    mov x1, 515      // x
+    mov x2, 190       // y
     mov x5, 55      // largo
     mov x6, 35     // alto
     movz w4, 0x00, lsl 16
 	movk w4, 0x0000, lsl 0
     bl llenar_cuadrado
 
+
     //mesa
     movz w4, 0x6633
     movk w4, 0x0099, lsl #16
-    mov x1, 80              // x inicial
-    mov x2, 420             // y inicial
-    mov x5, 560             // ancho
+    mov x1, 20              // x inicial
+    mov x2, 450             // y inicial
+    mov x5, 620             // ancho
     mov x6, 30              // alto
     bl llenar_cuadrado
 
-    mov x1, 180            // posición x
-    mov x2, 320            // posición y
-    mov x5, 460            // ancho del rectángulo
+    mov x1, 120            // posición x
+    mov x2, 350            // posición y
+    mov x5, 520            // ancho del rectángulo
     mov x6, 100            // alto del rectángulo
     bl llenar_cuadrado
 
-    mov x1, 80        // posición X de inicio
-    mov x2, 420        // posición Y de inicio
+    mov x1, 20        // posición X de inicio
+    mov x2, 450        // posición Y de inicio
     mov x5, 100         // base
     mov x6, 100         // altura
     bl triangulo_rectangulo_reflejado
 
-    mov x1, 70         // posición X (ajustá según necesidad)
-    mov x2, 420        // posición Y (ajustá según necesidad)
+    mov x1, 10         // posición X (ajustá según necesidad)
+    mov x2, 450        // posición Y (ajustá según necesidad)
     mov w4, 0x000000   // color negro
-    mov x5, 600        // largo de la línea en píxeles
+    mov x5, 630        // largo de la línea en píxeles
     bl linea_horizontal
 
     // Pantalla (cuadrado grande)
-    mov x1, 160        // x inicial
-    mov x2, 240        // y inicial (más arriba de la mesa)
+    mov x1, 100        // x inicial
+    mov x2, 270        // y inicial (más arriba de la mesa)
     mov x5, 200        // ancho
     mov x6, 120         // alto
     movz w4, 0x2422
@@ -289,8 +339,8 @@ loop:
     bl llenar_cuadrado
 
     //// Soporte vertical 
-    mov x1, 250        // x inicial
-    mov x2, 320        // y inicial 
+    mov x1, 190        // x inicial
+    mov x2, 350        // y inicial 
     mov x5, 20        // ancho
     mov x6, 80         // alto
     movz w4, 0x302D
@@ -298,8 +348,8 @@ loop:
     bl llenar_cuadrado
 
     //// soporte hhorizontal
-    mov x1, 170        // x inicial
-    mov x2, 390        // y inicial 
+    mov x1, 110        // x inicial
+    mov x2, 420        // y inicial 
     mov x5, 180        // ancho
     mov x6, 20         // alto
     movz w4, 0x302D
@@ -307,34 +357,73 @@ loop:
     bl llenar_cuadrado
     
     mov w4, #0x0000
-    mov x1, 260         // centro x del círculo
-    mov x2, 310         // centro y del círculo
+    mov x1, 200         // centro x del círculo
+    mov x2, 340         // centro y del círculo
     mov x5, 25          // radio
     bl circulo
 
-    mov x1, 200          // x inicial
-    mov x2, 250          // y inicial
+    mov x1, 140          // x inicial
+    mov x2, 280          // y inicial
     mov x5, 1            // ancho de línea
     mov x6, 60           // alto de línea
     bl linea_diagonal
 
-    mov x1, 270          // x inicial
-    mov x2, 300          // y inicial
+    mov x1, 210          // x inicial
+    mov x2, 330          // y inicial
     mov x5, 1            // ancho
     mov x6, 50           // alto
     bl linea_diagonal2
 
-    mov x1, 248         // X inicial
-    mov x2, 300         // Y inicial
+    mov x1, 188         // X inicial
+    mov x2, 330         // Y inicial
     mov x5, 60         // alto
     mov x6, 1           // grosor
     bl linea_vertical
 
-    mov x1, 271         // X inicial
-    mov x2, 300         // Y inicial
+    mov x1, 211         // X inicial
+    mov x2, 330         // Y inicial
     mov x5, 60         // alto
     mov x6, 1           // grosor
     bl linea_vertical
+
+
+
+
+
+/// mano
+
+    mov x1, 340     // x
+    mov x2, 300       // y
+    mov x5, 40      // largo
+    mov x6, 40     // alto
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl llenar_cuadrado
+
+
+    mov x1,350     // x
+    mov x2, 320      // y
+    mov x5, 22
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl circulo
+
+
+
+    mov x1, 345     // x
+    mov x2, 330      // y
+    mov x5, 15      // largo
+    mov x6, 40     // alto
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl llenar_cuadrado
+
+    mov x1, 352     // x
+    mov x2, 370      // y
+    mov x5, 8
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl circulo
 
 
     /// lampara
@@ -359,6 +448,9 @@ loop:
     mov x5, 90   // base
     mov x6, 40     // altura
     bl triangulo_equilatero
+
+
+
 
 InfLoop:
     b InfLoop
