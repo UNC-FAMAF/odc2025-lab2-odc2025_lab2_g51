@@ -14,69 +14,69 @@ LOAD simbolos.o
 LOAD start.o
                 0x0000000000080000                . = 0x80000
 
-.text           0x0000000000080000    0x911ec
+.text           0x0000000000080000    0x912f4
  *(.text.boot)
  .text.boot     0x0000000000080000    0x100c8 start.o
                 0x0000000000080000                _start
  *(.text*)
  .text          0x00000000000900c8      0xcf8 app.o
-                0x00000000000904f4                main
- .text          0x0000000000090dc0      0x42c funciones.o
- .text          0x00000000000911ec        0x0 simbolos.o
- .text          0x00000000000911ec    0x80000 start.o
+                0x00000000000905fc                main
+ .text          0x0000000000090dc0      0x534 funciones.o
+ .text          0x00000000000912f4        0x0 simbolos.o
+ .text          0x00000000000912f4    0x80000 start.o
 
-.iplt           0x00000000001111ec        0x0
- .iplt          0x00000000001111ec        0x0 app.o
+.iplt           0x00000000001112f4        0x0
+ .iplt          0x00000000001112f4        0x0 app.o
 
-.rela.dyn       0x00000000001111f0        0x0
- .rela.iplt     0x00000000001111f0        0x0 app.o
+.rela.dyn       0x00000000001112f8        0x0
+ .rela.iplt     0x00000000001112f8        0x0 app.o
  .rela.text.boot
-                0x00000000001111f0        0x0 app.o
+                0x00000000001112f8        0x0 app.o
 
-.data           0x00000000001111ec      0x278
- .data          0x00000000001111ec        0x0 app.o
- .data          0x00000000001111ec        0x0 funciones.o
- .data          0x00000000001111ec      0x278 simbolos.o
-                0x00000000001111ec                letra_0
-                0x00000000001111f3                letra_1
-                0x00000000001111fa                letra_Y
-                0x0000000000111201                letra_O
-                0x0000000000111208                letra_D
-                0x000000000011120f                letra_C
-                0x0000000000111216                numero_2
-                0x000000000011121d                numero_5
-                0x0000000000111224                tabla_letras1
-                0x0000000000111264                tabla_letras2
-                0x00000000001112a4                tabla_letras3
-                0x0000000000111424                tabla_general
- .data          0x0000000000111464        0x0 start.o
+.data           0x00000000001112f4      0x278
+ .data          0x00000000001112f4        0x0 app.o
+ .data          0x00000000001112f4        0x0 funciones.o
+ .data          0x00000000001112f4      0x278 simbolos.o
+                0x00000000001112f4                letra_0
+                0x00000000001112fb                letra_1
+                0x0000000000111302                letra_Y
+                0x0000000000111309                letra_O
+                0x0000000000111310                letra_D
+                0x0000000000111317                letra_C
+                0x000000000011131e                numero_2
+                0x0000000000111325                numero_5
+                0x000000000011132c                tabla_letras1
+                0x000000000011136c                tabla_letras2
+                0x00000000001113ac                tabla_letras3
+                0x000000000011152c                tabla_general
+ .data          0x000000000011156c        0x0 start.o
 
-.igot.plt       0x0000000000111468        0x0
- .igot.plt      0x0000000000111468        0x0 app.o
+.igot.plt       0x0000000000111570        0x0
+ .igot.plt      0x0000000000111570        0x0 app.o
 
-.bss            0x0000000000111464        0x0
+.bss            0x000000000011156c        0x0
  *(.bss*)
- .bss           0x0000000000111464        0x0 app.o
- .bss           0x0000000000111464        0x0 funciones.o
- .bss           0x0000000000111464        0x0 simbolos.o
- .bss           0x0000000000111464        0x0 start.o
+ .bss           0x000000000011156c        0x0 app.o
+ .bss           0x000000000011156c        0x0 funciones.o
+ .bss           0x000000000011156c        0x0 simbolos.o
+ .bss           0x000000000011156c        0x0 start.o
 
-.bss            0x0000000000111464        0xc
-                0x0000000000111470                . = ALIGN (0x10)
- *fill*         0x0000000000111464        0xc 
-                0x0000000000111470                __bss_start = .
+.bss            0x000000000011156c        0x4
+                0x0000000000111570                . = ALIGN (0x10)
+ *fill*         0x000000000011156c        0x4 
+                0x0000000000111570                __bss_start = .
  *(.bss .bss.*)
  *(COMMON)
-                0x0000000000111470                __bss_end = .
-                0x0000000000111470                _end = .
+                0x0000000000111570                __bss_end = .
+                0x0000000000111570                _end = .
                 0x0000000000000000                __bss_size = ((__bss_end - __bss_start) >> 0x3)
 OUTPUT(kernel8.elf elf64-littleaarch64)
 LOAD linker stubs
 
-.debug_line     0x0000000000000000      0x519
+.debug_line     0x0000000000000000      0x55d
  .debug_line    0x0000000000000000      0x385 app.o
- .debug_line    0x0000000000000385      0x144 funciones.o
- .debug_line    0x00000000000004c9       0x50 start.o
+ .debug_line    0x0000000000000385      0x188 funciones.o
+ .debug_line    0x000000000000050d       0x50 start.o
 
 .debug_info     0x0000000000000000       0x8a
  .debug_info    0x0000000000000000       0x2e app.o
@@ -96,8 +96,8 @@ LOAD linker stubs
  .debug_aranges
                 0x0000000000000060       0x30 start.o
 
-.debug_str      0x0000000000000000       0x6d
- .debug_str     0x0000000000000000       0x6d app.o
-                                         0x65 (size before relaxing)
- .debug_str     0x000000000000006d       0x65 funciones.o
- .debug_str     0x000000000000006d       0x61 start.o
+.debug_str      0x0000000000000000       0x75
+ .debug_str     0x0000000000000000       0x75 app.o
+                                         0x6d (size before relaxing)
+ .debug_str     0x0000000000000075       0x6d funciones.o
+ .debug_str     0x0000000000000075       0x69 start.o
