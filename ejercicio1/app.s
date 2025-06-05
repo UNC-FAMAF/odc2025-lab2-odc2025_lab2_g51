@@ -111,6 +111,15 @@ loop:
     bl llenar_cuadrado
 
 
+   // brazo der
+    mov x1, 530          // x inicial
+    mov x2, 300          // y inicial
+    mov x5, 30            // ancho de línea
+    mov x6, 60           // alto de línea
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl linea_diagonal
+
 
 //cabeza
 
@@ -391,7 +400,7 @@ loop:
 
 
 /// mano
-
+    /// mano
     mov x1, 340     // x
     mov x2, 300       // y
     mov x5, 40      // largo
@@ -400,7 +409,7 @@ loop:
 	movk w4, 0xb436, lsl 0
     bl llenar_cuadrado
 
-
+    /// parte redonda de la mano
     mov x1,350     // x
     mov x2, 320      // y
     mov x5, 22
@@ -408,9 +417,39 @@ loop:
 	movk w4, 0xb436, lsl 0
     bl circulo
 
-
-
+    // linea dedo
     mov x1, 345     // x
+    mov x2, 320      // y
+    mov x5, 22
+    movz w4, 0xba, lsl 16
+	movk w4, 0x8207, lsl 0
+    bl circulo
+
+
+    // dedo
+    mov x1,350     // x
+    mov x2, 320      // y
+    mov x5, 22
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl circulo
+
+        /// linea dedo indice
+    mov x1, 343        // X inicial
+    mov x2, 318         // Y inicial
+    mov x5, 25         // alto
+    mov x6, 1           // grosor
+    movz w4, 0xba, lsl 16
+	movk w4, 0x8207, lsl 0
+    bl linea_vertical
+
+
+ 
+
+
+
+    /// dedo indice
+    mov x1, 359     // x
     mov x2, 330      // y
     mov x5, 15      // largo
     mov x6, 40     // alto
@@ -418,12 +457,33 @@ loop:
 	movk w4, 0xb436, lsl 0
     bl llenar_cuadrado
 
-    mov x1, 352     // x
+    /// punta del dedo
+    mov x1, 366     // x
     mov x2, 370      // y
     mov x5, 8
     movz w4, 0xdd, lsl 16
 	movk w4, 0xb436, lsl 0
     bl circulo
+
+        /// linea dedo indice
+    mov x1, 374        // X inicial
+    mov x2, 320         // Y inicial
+    mov x5, 57         // alto
+    mov x6, 1           // grosor
+    movz w4, 0xba, lsl 16
+	movk w4, 0x8207, lsl 0
+    bl linea_vertical
+
+            /// linea dedo indice
+    mov x1, 359        // X inicial
+    mov x2, 320         // Y inicial
+    mov x5, 57         // alto
+    mov x6, 1           // grosor
+    movz w4, 0xba, lsl 16
+	movk w4, 0x8207, lsl 0
+    bl linea_vertical
+
+
 
 
     /// lampara
@@ -448,6 +508,7 @@ loop:
     mov x5, 90   // base
     mov x6, 40     // altura
     bl triangulo_equilatero
+
 
 
 
