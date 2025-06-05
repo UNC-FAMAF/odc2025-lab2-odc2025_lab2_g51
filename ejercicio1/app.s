@@ -395,10 +395,186 @@ loop:
     mov x6, 1           // grosor
     bl linea_vertical
 
+     // Dibuja un teclado con perspectiva usando llenar_cuadrado
+
+    //rectangulo chiquito del borde
+    mov w4, #0x0000
+    mov x1, 300              // x inicial
+    mov x2, 410             // y inicial
+    mov x5, 220             // ancho
+    mov x6, 10              // alto
+    bl llenar_cuadrado
+
+    // base del teclado rectangulo
+    mov w4, #0x0000
+    mov x1, 400           // posición x
+    mov x2, 361            // posición y
+    mov x5, 120            // ancho del rectángulo
+    mov x6, 50            // alto del rectángulo
+    bl llenar_cuadrado
+
+    // triangulo da perspectiva
+    mov w4, #0x0000
+    mov x1, 300        // posición X de inicio
+    mov x2, 410        // posición Y de inicio
+    mov x5, 100         // base
+    mov x6, 50         // altura
+    bl triangulo_rectangulo_reflejado
+
+    // linea horizontal
+    mov w4, #0x0000
+    mov x1, 300         // posición X (ajustá según necesidad)
+    mov x2, 410        // posición Y (ajustá según necesidad)
+    mov w4, 0xFF   // color negro
+    mov x5, 170       // largo de la línea en píxeles
+    bl linea_horizontal
+
+    mov w4, #0x0000
+    mov x1, 470          // x inicial
+    mov x2, 409         // y inicial
+    mov x5, 1            // ancho
+    mov x6, 48           // alto
+    mov w4, 0xFF   // color negro
+    bl linea_diagonal2
+
+    //teclas
+
+    mov x1, 350            // x
+    mov x2, 360            // y
+    mov x5, 160            // largo
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16    
+    bl linea_horizontal
+
+
+    mov x1, 340            // x
+    mov x2, 370            // y
+    mov x5, 160            // largo
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_horizontal
+
+    mov x1, 330            // x
+    mov x2, 380            // y
+    mov x5, 160            // largo
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_horizontal
+
+    mov x1, 320            // x
+    mov x2, 390            // y
+    mov x5, 160            // largo
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_horizontal
+
+
+    mov x1, 310            // x
+    mov x2, 400            // y
+    mov x5, 160            // largo
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_horizontal
+
+
+    mov x1, 320          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    bl linea_diagonal2
+
+    mov x1, 339          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    bl linea_diagonal2
+
+
+    mov x1, 350          // x inicial
+    mov x2, 390          // y inicial
+    mov x5, 20            // ancho de línea
+    mov x6, 10           // alto de línea
+    bl linea_diagonal2
+
+
+    mov w4, #0x0000
+    mov x1, 365         // centro x del círculo
+    mov x2, 385         // centro y del círculo
+    mov x5, 5          // radio
+    bl circulo
+
+    mov x1, 360          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_diagonal2
+
+    mov x1, 380          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_diagonal2
+
+    mov x1, 400          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_diagonal2
+
+    mov x1, 420          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_diagonal2
+
+    mov x1, 440          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_diagonal2
+
+    mov x1, 460          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_diagonal2
+
+    mov x1, 470          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_diagonal2
 
 
 
+    
+    //Triangulo tapa teclado para dar perspectiva
 
+    
+    mov x1, 460        // posición X de inicio
+    mov x2, 430        // posición Y de inicio
+    mov x5, 70         // base
+    mov x6, 60         // altura
+    movz w4, 0x6633
+    movk w4, 0x0099, lsl #16
+    bl triangulo_rectangulo_reflejado
+
+
+    
 /// mano
     /// mano
     mov x1, 340     // x
