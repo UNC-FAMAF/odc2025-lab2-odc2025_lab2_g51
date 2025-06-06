@@ -4,19 +4,17 @@
     .equ NUM_LETRAS, 8
 
     #include "simbolos.s"
-    .include "funciones.s"
+    .include "animacion.s"
 	.globl main
 
 main:
-
-// animacion
-//bl fondo_negro
-//bl fondo_letras
-bl partes
-bl animacion_mano
-bl fondo_mano
-//bl animacion_letras
-
+    // animacion
+    //bl fondo_negro
+    //bl fondo_letras
+    bl partes
+    bl animacion_mano
+    bl fondo_mano
+    //bl animacion_letras
 
 InfLoop:
     b InfLoop
