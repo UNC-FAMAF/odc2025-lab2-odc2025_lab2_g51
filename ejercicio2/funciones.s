@@ -418,19 +418,21 @@ fin_y:
 ret
 
 
-loop_delay:
+delay:
     stp x29, x30, [sp, -16]! 
     mov x29, sp
     str x19, [sp, -8]! 
 
     mov x19, x18 // x18 es la duración, se copia este valor en x19
 
-    sub x19, x19, 1 // resta 1 a la duracion
+loop_delay:
+    subs x19, x19, 1 // resta 1 a la duracion
     cbnz x19, loop_delay // si no es cero el loop sigue
   
     ldr x19, [sp], 8 
     ldp x29, x30, [sp], 16 
     ret
+
 
 
 
@@ -1143,6 +1145,23 @@ ret
     ldp x29, x30, [sp], 16
     ret
 
+partes:
+    stp x29, x30, [sp, -16]!
+    mov x29, sp
+    stp x19, x20, [sp, -16]!
+   bl fondo_letras
+    
+    bl silla
+    bl gaturro
+    bl lentes
+    bl mesa
+    bl lampara
+    bl teclado
+       ldp x19, x20, [sp], 16
+    ldp x29, x30, [sp], 16
+    ret
+ret
+
 
 animacion_mano:
 
@@ -1158,35 +1177,39 @@ animacion_mano:
 
 
 
-mov x28,  20
+    mov x28,  14 /// duracion
 
 loopmano:
-    // Fondo primero
-    bl silla
-    bl gaturro
-    bl lentes
-    bl mesa
-    bl lampara
-    bl teclado
+    mov x18, 0xffffff
+    bl delay
 
-    // Mano al final, así queda arriba
+
+   bl fondo_mano
+    mov x18, 0xfff
+    bl delay
+    // mano al final, así queda arriba
     bl mano
 
-    // Movimiento vertical (Y)
-    add x19, x19, 10
-    add x20, x20, 10
-    add x21, x21, 10
-    add x22, x22, 10
-    add x23, x23, 10
-    add x24, x24, 10
-    add x25, x25, 10
-    add x26, x26, 10
-    add x27, x27, 10
+/// moviemiento para abajo de la mano
 
-    // Loop control
-    subs x28, x28, 2
+    add x19, x19, 1
+    add x20, x20, 1
+    add x21, x21, 1
+    add x22, x22, 1
+    add x23, x23, 1
+    add x24, x24, 1
+    add x25, x25, 1
+    add x26, x26, 1
+    add x27, x27, 1
+
+
+
+    subs x28, x28, 1
     cbnz x28, loopmano
-
+    mov x18, 0xfffffff
+    mov x28,  14 /// duracion
+    bl delay
+    
     b animacion_mano
 ret
 
@@ -1346,18 +1369,18 @@ ret
 
 
 
-fondo_negro:
+fondo_mano:
     stp x29, x30, [sp, -16]!
     mov x29, sp
     stp x19, x20, [sp, -16]!
 
-mov x1, 0      // x
-mov x2, 0       // y
-mov x5, SCREEN_HEIGH       // largo
-mov x6, SCREEN_WIDTH     // alto
-movz w4, 0x00, lsl 16
-movk w4, 0x00, lsl 0
-bl llenar_cuadrado
+    mov x1, 300
+    mov x2, 300
+    mov x5, 80
+    mov x6, 90
+    movz w4, 0x9185
+    movk w4, 0x007F, lsl #16
+    bl llenar_cuadrado
 
     ldp x19, x20, [sp], 16
     ldp x29, x30, [sp], 16

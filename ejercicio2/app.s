@@ -9,11 +9,13 @@
 
 main:
 
-/// animacion
-bl fondo_negro 
-bl fondo_letras
-
+// animacion
+//bl fondo_negro
+//bl fondo_letras
+bl partes
 bl animacion_mano
+//bl animacion_letras
+
 
 InfLoop:
     b InfLoop
