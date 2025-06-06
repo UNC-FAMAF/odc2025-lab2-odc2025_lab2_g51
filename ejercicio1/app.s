@@ -4,7 +4,8 @@
     .equ NUM_LETRAS, 8
 
     #include "simbolos.s"
-    .include "funciones.s"
+    .include "dibujos.s"
+    .include "funcionesFondo.s" 
 	.globl main
 
 main:
@@ -18,7 +19,6 @@ ldr x6, =tabla_general
 
 loop:
     mov x2, 0
-
     // cargar puntero a tabla desde tabla_general[x5]
     ldr x3, [x6, x5, lsl #3]
 
@@ -32,10 +32,7 @@ loop:
 .no_reset:
     cmp x1, #640
     blt loop
-
-
-
-/// imagen 
+    // imagen 
     bl silla
     bl gaturro
     bl lentes
@@ -43,7 +40,6 @@ loop:
     bl lampara
     bl teclado
     bl mano
-
 
 InfLoop:
     b InfLoop
