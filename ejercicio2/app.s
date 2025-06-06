@@ -14,6 +14,7 @@ main:
 //bl fondo_letras
 bl partes
 bl animacion_mano
+bl fondo_mano
 //bl animacion_letras
 
 

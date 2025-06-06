@@ -879,28 +879,6 @@ teclado:
 
     //teclas
 
-    mov x1, 350            // x
-    mov x2, 360            // y
-    mov x5, 160            // largo
-    movz w4, 0xFFFF, lsl 0    
-    movk w4, 0x00FF, lsl 16    
-    bl linea_horizontal
-
-
-    mov x1, 340            // x
-    mov x2, 370            // y
-    mov x5, 160            // largo
-    movz w4, 0xFFFF, lsl 0    
-    movk w4, 0x00FF, lsl 16 
-    bl linea_horizontal
-
-    mov x1, 330            // x
-    mov x2, 380            // y
-    mov x5, 160            // largo
-    movz w4, 0xFFFF, lsl 0    
-    movk w4, 0x00FF, lsl 16 
-    bl linea_horizontal
-
     mov x1, 320            // x
     mov x2, 390            // y
     mov x5, 160            // largo
@@ -915,33 +893,6 @@ teclado:
     movz w4, 0xFFFF, lsl 0    
     movk w4, 0x00FF, lsl 16 
     bl linea_horizontal
-
-
-    mov x1, 320          // x inicial
-    mov x2, 400          // y inicial
-    mov x5, 1            // ancho de línea
-    mov x6, 40           // alto de línea
-    bl linea_diagonal2
-
-    mov x1, 339          // x inicial
-    mov x2, 400          // y inicial
-    mov x5, 1            // ancho de línea
-    mov x6, 40           // alto de línea
-    bl linea_diagonal2
-
-
-    mov x1, 350          // x inicial
-    mov x2, 390          // y inicial
-    mov x5, 20            // ancho de línea
-    mov x6, 10           // alto de línea
-    bl linea_diagonal2
-
-
-    mov w4, #0x0000
-    mov x1, 365         // centro x del círculo
-    mov x2, 385         // centro y del círculo
-    mov x5, 5          // radio
-    bl circulo
 
     mov x1, 360          // x inicial
     mov x2, 400          // y inicial
@@ -1040,14 +991,6 @@ mano:
     mov x5, 22
     movz w4, 0xdd, lsl 16
 	movk w4, 0xb436, lsl 0
-    bl circulo
-
-    // linea dedo
-    mov x1, 348    // x
-    mov x2, x21      // y
-    mov x5, 22
-    movz w4, 0xba, lsl 16
-	movk w4, 0x8207, lsl 0
     bl circulo
 
 
@@ -1374,13 +1317,98 @@ fondo_mano:
     mov x29, sp
     stp x19, x20, [sp, -16]!
 
-    mov x1, 300
-    mov x2, 300
-    mov x5, 80
+    mov x1, 327
+    mov x2, 299
+    mov x5, 53
     mov x6, 90
-    movz w4, 0x9185
-    movk w4, 0x007F, lsl #16
+    mov w4 , 0x00
     bl llenar_cuadrado
+
+    mov x1, 350            // x
+    mov x2, 360            // y
+    mov x5, 160            // largo
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16    
+    bl linea_horizontal
+
+    mov x1, 340            // x
+    mov x2, 370            // y
+    mov x5, 160            // largo
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_horizontal
+
+    mov x1, 330            // x
+    mov x2, 380            // y
+    mov x5, 160            // largo
+    movz w4, 0xFFFF, lsl 0    
+    movk w4, 0x00FF, lsl 16 
+    bl linea_horizontal
+
+    mov x1, 320          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    bl linea_diagonal2
+
+    mov x1, 339          // x inicial
+    mov x2, 400          // y inicial
+    mov x5, 1            // ancho de línea
+    mov x6, 40           // alto de línea
+    bl linea_diagonal2
+
+
+    mov x1, 350          // x inicial
+    mov x2, 390          // y inicial
+    mov x5, 20            // ancho de línea
+    mov x6, 10           // alto de línea
+    bl linea_diagonal2
+
+
+    mov w4, #0x0000
+    mov x1, 365         // centro x del círculo
+    mov x2, 385         // centro y del círculo
+    mov x5, 5          // radio
+    bl circulo
+
+    movz w4, 0x6633
+    movk w4, 0x0099, lsl #16
+    mov x1, 325              // x inicial
+    mov x2, 350             // y inicial
+    mov x5, 60             // ancho
+    mov x6, 10              // alto
+    bl llenar_cuadrado
+
+
+    movz w4, 0x6633
+    movk w4, 0x0099, lsl #16
+    mov x1, 308          // x inicial
+    mov x2, 379          // y inicial
+    mov x5, 22            // ancho de línea
+    mov x6, 22           // alto de línea
+    bl linea_diagonal2
+
+    movz w4, 0x6633
+    movk w4, 0x0099, lsl #16
+    mov x1, 324         // centro x del círculo
+    mov x2, 379         // centro y del círculo
+    mov x5, 5          // radio
+    bl circulo
+
+    mov x1, 350     // x
+    mov x2, 305       // y
+    mov x5, 50      // largo
+    mov x6, 16     // alto
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    bl llenar_cuadrado
+
+    movz w4, 0xdd, lsl 16
+	movk w4, 0xb436, lsl 0
+    mov x1, 350         // centro x del círculo
+    mov x2, 327         // centro y del círculo
+    mov x5, 22          // radio
+    bl circulo
 
     ldp x19, x20, [sp], 16
     ldp x29, x30, [sp], 16
