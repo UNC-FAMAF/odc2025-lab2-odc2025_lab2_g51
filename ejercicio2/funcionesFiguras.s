@@ -7,7 +7,7 @@ posicion:
     mov x12, SCREEN_WIDTH
     mul x11, x11, x12  // y * SCREEN_WIDTH
     add x11, x11, x10  // y * WIDTH + x
-    lsl x11, x11, 2   // (y * WIDTH + x) * 4 (bytes por pixel)
+    lsl x11, x11, 2    // (y * WIDTH + x) * 4 (bytes por pixel)
     add x0, x0, x11    
     ret
 
@@ -40,9 +40,9 @@ loopA:
     mov x2, x28        // y actual
     bl pixel
 
-    add x27, x27, 1   // x27 = x27 + 1
-    sub x9, x9, 1     // x9 = x9 - 1
-    cbnz x9, loopA    // si x9 != 0, loopA
+    add x27, x27, 1    // x27 = x27 + 1
+    sub x9, x9, 1      // x9 = x9 - 1
+    cbnz x9, loopA     // si x9 != 0, loopA
 
     ldp x27, x28, [sp], 16
     ldp x29, x30, [sp], 16
@@ -62,9 +62,9 @@ linea_vertical:
     mov x2, x28        // y actual
     bl pixel
 
-    add x28, x28, 1   // x27 = x27 + 1
-    sub x9, x9, 1     // x9 = x9 - 1
-    cbnz x9, loopB    // si x9 != 0, loopB
+    add x28, x28, 1    // x27 = x27 + 1
+    sub x9, x9, 1      // x9 = x9 - 1
+    cbnz x9, loopB     // si x9 != 0, loopB
 
     ldp x27, x28, [sp], 16
     ldp x29, x30, [sp], 16
@@ -84,13 +84,13 @@ llenar_cuadrado:
 loopC:
     mov x1, x27        // x actual
     mov x2, x28        // y actual
-    mov x5, x25    // cantidad de pixeles a avanzar
+    mov x5, x25        // cantidad de pixeles a avanzar
     bl linea_horizontal
     
-    add x28, x28, 1   // x28 = x28 + 1
+    add x28, x28, 1     // x28 = x28 + 1
     sub x26, x26, 1     // x26 = x26 - 1
         
-    cbnz x26, loopC    // si x9 != 0, loopC
+    cbnz x26, loopC     // si x9 != 0, loopC
 
     ldp x25, x26, [sp], 16
     ldp x27, x28, [sp], 16
@@ -105,22 +105,22 @@ linea_diagonal:
     stp x25, x26, [sp, -16]!
     stp x23, x24, [sp, -16]!
 
-    mov x27, x1   // eje X
-    mov x28, x2   // eje y
-    mov x25, x5    // largo de la linea
+    mov x27, x1     // eje X
+    mov x28, x2     // eje y
+    mov x25, x5     // largo de la linea
     mov x24, x6     // cuantas lineas dura
 
 loopD:
     mov x1, x27        // x actual
     mov x2, x28        // y actual
-    mov x5, x25    // cantidad de pixeles a avanzar
+    mov x5, x25        // cantidad de pixeles a avanzar
     bl linea_horizontal
 
-    add x27, x27, 1    // eje x - 1
-    add x28, x28, 1   // eje y - 1
+    add x27, x27, 1     // eje x - 1
+    add x28, x28, 1     // eje y - 1
     sub x24, x24, 1     // cantidad de lineas - 1
 
-    cbnz x24, loopD        // si (x24 != 0), loopD
+    cbnz x24, loopD     // si (x24 != 0), loopD
 
     ldp x23, x24, [sp], 16      //libera memoria
     ldp x25, x26, [sp], 16
@@ -136,23 +136,23 @@ linea_diagonal2:
     stp x25, x26, [sp, -16]!
     stp x23, x24, [sp, -16]!
 
-    mov x27, x1   // eje X
-    mov x28, x2   // eje y
-    mov x25, x5    // largo de la linea
+    mov x27, x1     // eje X
+    mov x28, x2     // eje y
+    mov x25, x5     // largo de la linea
     mov x26, x6     // cuantas lineas dura el loop
-    mov x24, 0     //contador
+    mov x24, 0      //contador
 
 loopE:
     mov x1, x27        // x actual
     mov x2, x28        // y actual
-    mov x5, x25    // cantidad de pixeles a avanzar
+    mov x5, x25        // cantidad de pixeles a avanzar
     bl linea_horizontal
 
     sub x28, x28, 1     // eje x - 1
     add x27, x27, 1     // eje y - 1
     add x24, x24, 1     // contador + 1
     cmp x26, x24        // compara x26 y x24
-    b.ge loopE         // si x26 es mayor que x24, loopE. Sino termina
+    b.ge loopE          // si x26 es mayor que x24, loopE. Sino termina
 
     ldp x23, x24, [sp], 16     // libera memoria
     ldp x25, x26, [sp], 16
@@ -167,23 +167,23 @@ triangulo_rectangulo:
     stp x25, x26, [sp, -16]!
     stp x23, x24, [sp, -16]!
 
-    mov x27, x1   // eje X
-    mov x28, x2   // eje y
-    mov x25, x5    // base
+    mov x27, x1     // eje X
+    mov x28, x2     // eje y
+    mov x25, x5     // base
     mov x26, x6     // altura
-    mov x24, 0     //contador
+    mov x24, 0      //contador
 
 loopF:
-    mov x1, x27        // x actual
-    mov x2, x28        // y actual
-    mov x5, x25    // cantidad de pixeles a avanzar
+    mov x1, x27         // x actual
+    mov x2, x28         // y actual
+    mov x5, x25         // cantidad de pixeles a avanzar
     bl linea_horizontal
 
     sub x28, x28, 1     // (eje y - 1)  sube una linea
     sub x25, x25, 1
     add x24, x24, 1
     cmp x24, x26        // compara x26 y x24
-    b.lt loopF         // loopF si x26 es mayor que x24. Sino termina
+    b.lt loopF          // loopF si x26 es mayor que x24. Sino termina
 
     ldp x23, x24, [sp], 16     // libera memoria
     ldp x25, x26, [sp], 16
@@ -197,14 +197,14 @@ obtuso:
     stp x27, x28, [sp, -16]!
     stp x25, x26, [sp, -16]!
 
-    mov x27, x1   // eje X
-    mov x28, x2   // eje y
+    mov x27, x1    // eje X
+    mov x28, x2    // eje y
     mov x25, x5    // diametro
 
 loopG:
     mov x1, x27        // x actual
     mov x2, x28        // y actual
-    mov x5, x25    // cantidad de pixeles a avanza
+    mov x5, x25        // cantidad de pixeles a avanzar
     bl linea_horizontal
 
     sub x27, x27, 1
@@ -226,16 +226,16 @@ triangulo_rectangulo_reflejado:
     stp x25, x26, [sp, -16]!
     stp x23, x24, [sp, -16]!
 
-    mov x27, x1   // eje X
-    mov x28, x2   // eje y
-    mov x25, x5    // diametro
+    mov x27, x1     // eje X
+    mov x28, x2     // eje y
+    mov x25, x5     // diametro
     mov x26, x6     // alto
-    mov x24, 0     //contador
+    mov x24, 0      //contador
 
 loopH:
-    mov x1, x27        // x actual
-    mov x2, x28        // y actual
-    mov x5, x25    // cantidad de pixeles a avanzar
+    mov x1, x27         // x actual
+    mov x2, x28         // y actual
+    mov x5, x25         // cantidad de pixeles a avanzar
 
     bl linea_horizontal
 
@@ -261,21 +261,21 @@ triangulo_equilatero:
     stp x25, x26, [sp, -16]!
     stp x23, x24, [sp, -16]!
 
-    mov x27, x1   // eje X
-    mov x28, x2   // eje y
-    mov x25, x5    // base
+    mov x27, x1     // eje X
+    mov x28, x2     // eje y
+    mov x25, x5     // base
     mov x26, x6     // alto
 
 loopI:
     mov x1, x27        // x actual
     mov x2, x28        // y actual
-    mov x5, x25    // cantidad de pixeles a avanzar
+    mov x5, x25        // cantidad de pixeles a avanzar
 
     bl linea_horizontal
 
     sub x28, x28, 1     // (eje y - 1)  sube una linea
     add x27,x27, 1
-    sub x25, x25, 2    // (base - 2)
+    sub x25, x25, 2     // (base - 2)
 
     sub x26, x26, 1
     cbnz x26, loopI
@@ -300,8 +300,8 @@ dentro_circulo:
     stp x21, x22, [sp, -16]!
     stp x19, x20, [sp, -16]!
 
-    mov x27, x3   // eje X de centro
-    mov x28, x5   // eje y de centro
+    mov x27, x3    // eje X de centro
+    mov x28, x5    // eje y de centro
     mov x25, x6    // radio
 
     mul x26, x25, x25  // r^2
@@ -314,8 +314,8 @@ dentro_circulo:
     cmp x22, x26       // si x22 es menor que el radio^2, pinta un pixel
     b.ge fuera
 
-    mov x1, x10       // x
-    mov x2, x11       // y
+    mov x1, x10        // x
+    mov x2, x11        // y
     
     bl pixel
 
@@ -340,8 +340,8 @@ circulo:
     stp x23, x24, [sp, -16]!
     stp x21, x22, [sp, -16]!
 
-    mov x27, x1   // eje X de centro
-    mov x28, x2   // eje y de centro
+    mov x27, x1    // eje X de centro
+    mov x28, x2    // eje y de centro
     mov x25, x5    // radio
     
     sub x24, x27, x25 // (centro x - radio)

@@ -44,7 +44,6 @@ dibujar_letra:
     lsl x18, x18, #2
     add x18, x0, x18
 
-    // Pinta pixel
     str w4, [x18]
     
     add x15, x15, 1
@@ -74,8 +73,8 @@ lluvia_columna_secuencial:
     stp x25, x26, [sp, -16]!
     str x27, [sp, -16]!
 
-    mov x21, x1       // guardar posición X de la columna
-    mov x22, x2      // y actual
+    mov x21, x1      // guardar posición X de la columna
+    mov x22, x2      // Y actual
     mov x23, x3      // puntero a tabla de letras
     mov w24, w4      // color
 

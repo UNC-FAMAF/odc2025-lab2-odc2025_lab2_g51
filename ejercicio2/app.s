@@ -8,7 +8,7 @@
 	.globl main
 
 main:
-    // animacion
+    //animacion
     //bl fondo_negro
     //bl fondo_letras
     bl partes
